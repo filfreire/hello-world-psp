@@ -4,26 +4,25 @@ A hello world like app for the Sony Playstation Portable handheld videogame syst
 
 ## Prerequisites
 
-- You will need to setup `pspdev` toolchain - more about it [here](https://psp-dev.org/doku.php?id=tutorial:toolchain_setup).
-- Easy `docker` alternative (the one used for this repo): use [pspdev-docker](https://github.com/pspdev/pspdev-docker)
-```
-git clone git@github.com:pspdev/pspdev-docker.git
+Setup `pspdev` toolchain, [see docs](https://psp-dev.org/doku.php?id=tutorial:toolchain_setup).
 
-docker build -t pspdev-docker .
+You can use Docker image of [pspdev](https://github.com/pspdev/pspdev). There's helper script that uses aliases this container in this repo:
 
+```shell
 sudo cp pspdev-docker /usr/local/bin
 ```
-> Note: `docker build` took me around 25 mins on an Intel i7-6700K cpu.
 
 ## How to build
 - Clone this repo and `cd` into the repo folder.
 - If you used the `docker` alternative, run:
-```
+
+```shell
 psp-docker make
 ```
 
 You should see an output similar to:
-```
+
+```shell
 psp-gcc -I. -I/usr/local/pspdev/psp/sdk/include  -D_PSP_FW_VERSION=500   -c -o main.o main.c
 psp-gcc -I. -I/usr/local/pspdev/psp/sdk/include  -D_PSP_FW_VERSION=500  -L. -L/usr/local/pspdev/psp/sdk/lib -specs=/usr/local/pspdev/psp/sdk/lib/prxspecs -Wl,-q,-T/usr/local/pspdev/psp/sdk/lib/linkfile.prx   main.o /usr/local/pspdev/psp/sdk/lib/prxexports.o  -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk -lc -lpspnet -lpspnet_inet -lpspnet_apctl -lpspnet_resolver -lpsputility -lpspuser -lpspkernel -o Tutorial.elf
 psp-fixup-imports Tutorial.elf
