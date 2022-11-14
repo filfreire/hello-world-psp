@@ -1,0 +1,26 @@
+name: Publish Docker image
+on:
+  push:
+    branches: master
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build PSP artifacts
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v3
+    - name: Build using filfreire/pspdev-docker
+      run: docker run -v "`pwd`:/build" --rm ghcr.io/filfreire/pspdev-docker:latest make
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        if-no-files-found: ignore
+        name: psp-artifacts-${{ github.run_number }}
+        path: |
+          EBOOT.PBP
+          main.o
+          PARAM.SFO
+          Tutorial.elf
+          Tutorial.prx
