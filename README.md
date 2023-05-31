@@ -6,7 +6,7 @@ A hello world like app for the Sony Playstation Portable handheld videogame syst
 
 Setup `pspdev` toolchain, [see docs](https://psp-dev.org/doku.php?id=tutorial:toolchain_setup).
 
-You can use Docker image of [pspdev](https://github.com/pspdev/pspdev). There's helper script that uses aliases this container in this repo:
+You can use [Docker image](https://github.com/filfreire/pspdev-docker) of [pspdev](https://github.com/pspdev/pspdev). There's helper script that uses aliases this container in this repo:
 
 ```shell
 sudo cp pspdev-docker /usr/local/bin
